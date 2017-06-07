@@ -49,7 +49,9 @@ function deal() {
 function addCardsToWinnersPot() {
   let newWinnersPot = this.winnersPot;
   this.players.forEach(function(player) {
-    newWinnersPot.push(player.cardOnTable);
+    if (Object.keys(player.cardOnTable).length !== 0) {
+      newWinnersPot.push(player.cardOnTable);
+    }
     player.clearCard();
   });
   this.winnersPot = newWinnersPot;
@@ -63,7 +65,10 @@ function playerWins(player) {
 function allPlayersHavePlayed() {
   let havePlayed = true;
   this.players.forEach(player => {
-    if (Object.keys(player.cardOnTable).length === 0) {
+    // They don't have a card down AND the they have more cards to be played
+    if (
+      Object.keys(player.cardOnTable).length === 0 && player.hand.length > 0
+    ) {
       havePlayed = false;
     }
   });
@@ -119,9 +124,13 @@ function valuePosition(card) {
 function cardIsBigger(player1, player2) {
   const card1Value = valuePosition(player1[0].cardOnTable);
   const card2Value = valuePosition(player2[0].cardOnTable);
-  if (card1Value > card2Value) {
+  if (
+    card1Value > card2Value || Object.keys(player2[0].cardOnTable).length === 0
+  ) {
     return player1;
-  } else if (card2Value > card1Value) {
+  } else if (
+    card2Value > card1Value || Object.keys(player1[0].cardOnTable).length === 0
+  ) {
     return player2;
   } else {
     return player1.concat(player2);

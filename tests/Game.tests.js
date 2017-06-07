@@ -209,5 +209,46 @@ describe('Game', function() {
       expect(gameOver).to.eql(true);
       expect(testGame.winner).to.eql(player1);
     });
+    it.only(
+      'should be able to continue after a player runs out of cards',
+      function() {
+        let testGame = new Game();
+        testGame.addPlayer('abcd');
+        let player1 = testGame.players[0];
+        player1.addCard({ value: '5', suit: 'Spades' });
+        player1.addCard({ value: '10', suit: 'Diamonds' });
+        player1.addCard({ value: 'A', suit: 'Spades' });
+        player1.play();
+        testGame.addPlayer('efgh');
+        let player2 = testGame.players[1];
+        player2.addCard({ value: '5', suit: 'Hearts' });
+        player2.addCard({ value: '8', suit: 'Diamonds' });
+        player2.addCard({ value: '2', suit: 'Clubs' });
+        player2.play();
+        testGame.addPlayer('ijkl');
+        let player3 = testGame.players[2];
+        player3.addCard({ value: '5', suit: 'Clubs' });
+        player3.addCard({ value: '4', suit: 'Clubs' });
+        player3.play();
+        testGame.compare();
+        expect(player1.hand.length).to.eql(2);
+        expect(player2.hand.length).to.eql(2);
+        expect(player3.hand.length).to.eql(1);
+        player1.play();
+        player2.play();
+        player3.play();
+        testGame.compare();
+        expect(player1.hand.length).to.eql(7);
+        expect(player2.hand.length).to.eql(1);
+        expect(player3.hand.length).to.eql(0);
+        expect(testGame.winnersPot.length).to.eql(0);
+        player1.play();
+        player2.play();
+        testGame.compare();
+        expect(player1.hand.length).to.eql(8);
+        expect(player2.hand.length).to.eql(0);
+        expect(testGame.winner).to.eql(player1);
+      }
+    );
   });
 });

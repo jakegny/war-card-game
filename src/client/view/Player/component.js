@@ -12,10 +12,8 @@ class Player extends Component {
     const isMe = this.props.player && this.props.myId === this.props.player.id;
     return (
       <div>
-        {isMe ? 'you --' : null}
-        Player
-        <p>{this.props.player.id}</p>
-        <p>Number of cards: {this.props.player.hand.length}</p>
+        <p>Player - {this.props.player.id}</p>
+        <p>Number of cards in hand: {this.props.player.hand.length}</p>
         <p>
           Card:
           {' '}
