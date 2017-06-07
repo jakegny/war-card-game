@@ -1,7 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
-const Deck = require('../src/Deck');
-const Player = require('../src/Player');
+const Deck = require('../src/server/Deck');
+const Player = require('../src/server/Player');
 
 describe('Player', function() {
   describe('play', function() {
@@ -12,7 +12,8 @@ describe('Player', function() {
       testPlayer.addCards(splitDeck.player1Hand);
       const lengthBeforePlay = testPlayer.hand.length;
       const firstCard = testPlayer.hand[0];
-      const playedCard = testPlayer.play();
+      testPlayer.play();
+      const playedCard = testPlayer.cardOnTable;
       const lengthAfterPlay = testPlayer.hand.length;
       expect(lengthBeforePlay).to.eql(lengthAfterPlay + 1);
       expect(firstCard).to.eql(playedCard);
