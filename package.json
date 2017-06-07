@@ -4,12 +4,15 @@
   "description": "2 player card game",
   "main": "index.js",
   "scripts": {
+    "server": "server.js",
     "test": "mocha --reporter spec --throw-deprecation 'tests/*.tests.js'"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "chai": "^4.0.2",
-    "mocha": "^3.4.2"
+    "express": "^4.15.3",
+    "mocha": "^3.4.2",
+    "socket.io": "^2.0.2"
   }
 }

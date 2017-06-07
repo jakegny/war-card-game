@@ -1,4 +1,5 @@
-const Deck = require('./src/Deck');
+// const Deck = require('./src/Deck');
+const Game = require('./src/Game');
 
-const thisDeck = new Deck();
-console.log('thisDeck', thisDeck);
+const game = new Game(4);
+console.log('game', game.players);

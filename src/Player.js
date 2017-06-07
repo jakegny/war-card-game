@@ -1,8 +1,9 @@
-function Player(hand) {
-  this.hand = hand;
+function Player() {
+  this.hand = [];
 
   this.play = play;
   this.addCards = addCards;
+  this.addCard = addCard;
 }
 
 function play() {
@@ -11,6 +12,10 @@ function play() {
 
 function addCards(cards) {
   this.hand = this.hand.concat(cards);
+}
+
+function addCard(card) {
+  this.hand.push(card);
 }
 
 module.exports = Player;
